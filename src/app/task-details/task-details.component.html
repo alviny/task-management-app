@@ -1,0 +1,12 @@
+<!-- task-details.component.html -->
+<mat-card *ngIf="selectedTask">
+    <mat-card-header>
+      <div mat-card-avatar class="avatar"></div>
+      <mat-card-title>{{ selectedTask.title }}</mat-card-title>
+      <mat-card-subtitle>{{ selectedTask.description }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ selectedTask.details }}</p>
+    </mat-card-content>
+  </mat-card>
+  
