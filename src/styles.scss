@@ -11,6 +11,39 @@
   font-weight: normal;
   font-style: normal;
 }*/
+@font-face {
+  font-family: 'custom-icon';
+  src: url('./assets/fonts/custom-icon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-logout {
+  font-family: 'custom-icon';
+  /* Adjust the content property based on the specific icon in your font */
+  content: '\e900'; /* Unicode value for your custom icon */
+}
+.icon-task-list {
+  font-family: 'custom-icon';
+  /* Adjust the content property based on the specific icon in your font */
+  content: '\e90b'; /* Unicode value for your custom icon */
+}
+.icon-task-add {
+  font-family: 'custom-icon';
+  /* Adjust the content property based on the specific icon in your font */
+  content: '\e90a'; /* Unicode value for your custom icon */
+}
+.icon-task-edit {
+  font-family: 'custom-icon';
+  /* Adjust the content property based on the specific icon in your font */
+  content: '\e906'; /* Unicode value for your custom icon */
+}
+.icon-back {
+  font-family: 'custom-icon';
+  /* Adjust the content property based on the specific icon in your font */
+  content: '\e90c'; /* Unicode value for your custom icon */
+}
+
 body {
   margin: 0;
   font-family: Roboto, sans-serif;

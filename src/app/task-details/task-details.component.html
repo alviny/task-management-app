@@ -1,12 +1,17 @@
 <!-- task-details.component.html -->
-<mat-card *ngIf="selectedTask">
-    <mat-card-header>
-      <div mat-card-avatar class="avatar"></div>
-      <mat-card-title>{{ selectedTask.title }}</mat-card-title>
-      <mat-card-subtitle>{{ selectedTask.description }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{ selectedTask.details }}</p>
-    </mat-card-content>
-  </mat-card>
-  
+<div class="task-details-container">
+  <div class="header">
+    <button mat-icon-button (click)="goBack()">
+      <span class="icon-back">&#xe90c;</span>
+    </button>
+    <h2><span class="icon-task-edit">&#xe906;</span> Task Details</h2>
+  </div>
+  <div class="details-content">
+    <!-- Add your task details content here -->
+    <div *ngIf="task">
+      <h3>{{ task.title }}</h3>
+      <p>{{ task.description }}</p>
+      <!-- Add more details as needed -->
+    </div>
+  </div>
+</div>

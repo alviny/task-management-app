@@ -1,6 +1,7 @@
 // task-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Task, TaskService } from '../task.service';
+import { TaskService, Task } from '../task.service';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-task-list',
@@ -9,6 +10,10 @@ import { Task, TaskService } from '../task.service';
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
+  displayedColumns: string[] = ['select','title', 'description']; // Remove 'select' column
+
+  selection = new SelectionModel<Task>(true, []); // Enable multi-selection
+  selectedTask: Task | null = null;
 
   constructor(private taskService: TaskService) {}
 
@@ -26,8 +31,31 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  claimTask(task: Task) {
-    this.taskService.claimTask(task);
+  isAllSelected(): boolean {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.tasks.length;
+    return numSelected === numRows;
+  }
+
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.tasks.forEach((row) => this.selection.select(row));
+  }
+
+  selectTask(task: Task) {
+    this.selectedTask = task;
+  }
+
+  closeTaskDetails() {
+    this.selectedTask = null;
+  }
+
+  claimSelectedTasks() {
+    // Implement the logic to claim the selected tasks
+    const selectedTasks = this.selection.selected;
+    console.log('Claiming selected tasks:', selectedTasks);
+
+    // Add your logic to handle the claim action
   }
 }
-

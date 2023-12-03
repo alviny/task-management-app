@@ -16,7 +16,9 @@ export class TaskService {
     console.log(`Task ${task.title} claimed!`);
     this.selectedTask.next(task);
   }
-
+  setSelectedTask(task: Task){
+    console.log(`Task ${task.title} selected!`);
+  }
   setTasks(tasks: Task[]) {
     this.tasks.next(tasks);
   }

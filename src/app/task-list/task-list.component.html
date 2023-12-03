@@ -1,22 +1,41 @@
 <!-- task-list.component.html -->
-<mat-sidenav-container class="sidenav-container">
-    <mat-sidenav mode="side" opened>
-      <mat-nav-list>
-        <mat-list-item *ngFor="let task of tasks" (click)="claimTask(task)">
-          <mat-icon mat-list-icon>assignment</mat-icon>
-          <h3 mat-line>{{ task.title }}</h3>
-          <p mat-line>{{ task.description }}</p>
-        </mat-list-item>
-      </mat-nav-list>
-    </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <div class="content">
-        <div class="header">
-          <h2>Task Details</h2>
-        </div>
-        <app-task-details></app-task-details>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
+<div class="task-list" [ngClass]="{ 'minimized': selectedTask }">
+  <mat-accordion *ngIf="!selectedTask">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span class="icon-task-list">&#xe90b;</span> Task List
+        </mat-panel-title>
+        <button mat-raised-button color="primary" *ngIf="selection.hasValue()" (click)="claimSelectedTasks()">Claim</button>
+      </mat-expansion-panel-header>
+      <mat-table [dataSource]="tasks" class="mat-elevation-z8" matSort matSortActive="title" matSortDirection="asc">
+        <ng-container matColumnDef="select">
+          <mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"></mat-checkbox>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+          <mat-cell *matCellDef="let task">{{ task.title }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+          <mat-cell *matCellDef="let task">{{ task.description }}</mat-cell>
+        </ng-container>
+
+        <!-- Add more columns as needed -->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectTask(row)" [class.selected-row]="selection.isSelected(row)"></mat-row>
+      </mat-table>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="task-details-fullscreen" *ngIf="selectedTask">
+    <app-task-details [task]="selectedTask" (goBackEvent)="closeTaskDetails()"></app-task-details>
+  </div>
+</div>
+

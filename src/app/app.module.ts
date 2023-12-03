@@ -10,6 +10,9 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion'; // Import MatExpansionModule
+import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
+import { MatCheckboxModule } from '@angular/material/checkbox'; // Import MatCheckboxModule
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,10 @@ import {MatIconModule} from '@angular/material/icon';
     MatListModule,
     MatCardModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule, 
+    MatTableModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
