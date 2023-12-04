@@ -20,8 +20,14 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     // Fetch tasks from your backend or set them manually
     const tasks: Task[] = [
-      { title: 'Task 1', description: 'Description 1', details: 'Details 1' },
-      { title: 'Task 2', description: 'Description 2', details: 'Details 2' },
+      { id: 1, title: 'Task 1', description: 'Description 1', details: 'Details 1' , owner : 'alviny',
+        files : [{ filename : 'test.pdf' }],
+        possibleTargets : [ { key : 'qa', display : 'QA'}, { key : 'pe', display : 'Post Edge'}]
+      },
+      { id : 2, title: 'Task 2', description: 'Description 2', details: 'Details 2', owner : 'alviny',
+        files : [{ filename : 'test2.pdf'}],
+        possibleTargets : [ { key : 'qa', display : 'QA'}, { key : 'pe', display : 'Post Edge'}]
+      },
       // Add more tasks as needed
     ];
 

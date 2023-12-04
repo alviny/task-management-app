@@ -25,8 +25,19 @@ export class TaskService {
 }
 
 export interface Task {
+  id : number;
   title: string;
   description: string;
   details: string;
+  owner : string;
+  files : FileInfo[]; 
+  possibleTargets : Target[];
+}
+export interface FileInfo {
+  filename : string;
+}
+export interface Target{
+  key : string,
+  display : string
 }
 

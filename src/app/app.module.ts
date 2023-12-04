@@ -10,9 +10,15 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion'; // Import MatExpansionModule
 import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
 import { MatCheckboxModule } from '@angular/material/checkbox'; // Import MatCheckboxModule
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,13 +29,21 @@ import { MatCheckboxModule } from '@angular/material/checkbox'; // Import MatChe
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCheckboxModule,
     MatListModule,
     MatCardModule,
     MatSidenavModule,
     MatIconModule,
     MatExpansionModule, 
     MatTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
