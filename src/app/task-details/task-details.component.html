@@ -1,36 +1,38 @@
+<!-- task-details.component.html -->
+
 <div class="task-details-container">
-  <div class="header">
-    <button mat-icon-button (click)="goBack()">
-      <span class="icon-custom">&#xe001;</span>
-    </button>
-    <h2>Task Details</h2>
-  </div>
-  <div class="details-content">
-    <!-- Task Details -->
-    <div *ngIf="task">
-      <h3>Task ID: {{ task.id }}</h3>
-      <p>Owner: {{ task.owner }}</p>
-    </div>
-
-    <!-- Multi-Select Dropdown with Mat Chips -->
-    <!--
-    <mat-form-field class="multi-select">
-      <mat-label>Select Files</mat-label>
-      <mat-select [formControl]="selectedFilesControl" multiple>
-        <mat-option *ngFor="let file of task?.files" [value]="file">
-          {{ file.filename }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  -->
-
-    <!-- Files Table -->
-    <div class="container">
-      <div *ngIf="task && task.files && task.files.length > 0">
+  <!-- Row 1 Panel: Task ID, Task Owner, Bundle File Name -->
+  <mat-expansion-panel [expanded]="true" (opened)="true" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="button" (click)="goBack()">
+          <h2><span class="icon-back">&#xe90c;</span></h2>
+        </div>
         <div>
-          <h3>Files</h3>
+          <h2><span class="icon-task-edit">&#xe906;</span>Task Details</h2>
+        </div>
+       
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-panel-description>
+      <p>Task ID: {{ task?.id }}</p>
+      <p>Task Owner: {{ task?.owner }}</p>
+      <p>Bundle File Name: {{ task?.bundleFilename }}</p>
+    </mat-panel-description>
+  </mat-expansion-panel>
+
+  <!-- Row 2 Panel: File List, Target Environments -->
+  <mat-expansion-panel [expanded]="true" (opened)="true" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        File List & Target Environments
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-panel-description>
+      <div class="row2-container">
+        <!-- Left Section: File List -->
+        <div class="left-section" *ngIf="task && task.files && task.files.length > 0">
           <mat-table [dataSource]="task.files" matSort class="mat-elevation-z8">
-      
             <!-- Select Column -->
             <ng-container matColumnDef="select">
               <th mat-header-cell *matHeaderCellDef>
@@ -40,45 +42,73 @@
                 <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"></mat-checkbox>
               </td>
             </ng-container>
-
             <!-- Filename Column -->
             <ng-container matColumnDef="filename">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Filename</th>
               <td mat-cell *matCellDef="let row">{{ row.filename }}</td>
             </ng-container>
-
             <!-- Filesize Column -->
             <ng-container matColumnDef="filesize">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Filesize</th>
               <td mat-cell *matCellDef="let row">{{ row.filesize }}</td>
             </ng-container>
-
             <!-- Add more columns as needed -->
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectFile(row)" [class.selected-row]="selection.isSelected(row)"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectFile(row)" [class.selected-row]="selection.isSelected(row)"></tr>          
           </mat-table>
         </div>
-        <div class="container-item">
-          <mat-form-field class="multi-select container-subitem">
-            <mat-label>Select Files</mat-label>
-            <mat-select [formControl]="selectedFilesControl" multiple>
-              <mat-option *ngFor="let target of task?.possibleTargets" [value]="target.key">
-                {{ target.display }}
+        
+        <!-- Right Section: Multi-Select for Target Environments -->
+        <div class="right-section">
+          <mat-form-field class="multi-select">
+            <mat-label>Select Target Environments</mat-label>
+            <mat-select [formControl]="targetEnvironmentsControl" multiple>
+              <mat-option *ngFor="let environment of targetEnvironments" [value]="environment">
+                {{ environment }}
               </mat-option>
             </mat-select>
-          </mat-form-field>      
-          <button class="container-subitem" mat-raised-button color="primary" [disabled]="!selection.hasValue()" (click)="addFiles()">Add</button>
-        </div>        
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="addFiles()">Add</button>
+        </div>
       </div>
-    </div>
-    <div>
-      <div *ngIf="selectedFilesDataSource.data.length > 0">
-        <h3>Selected Files</h3>
-        <mat-table [dataSource]="selectedFilesDataSource" matSort class="mat-elevation-z8">
-          <!-- ... (unchanged code) -->
-        </mat-table>
-      </div>      
-    </div>
-  </div>
+    </mat-panel-description>
+  </mat-expansion-panel>
+
+  <!-- Row 3 Panel: Selected Files and Target -->
+  <mat-expansion-panel [expanded]="true" (opened)="true" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Selected Files & Target
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-panel-description>
+      <!-- Display selected files and target here -->
+    </mat-panel-description>
+  </mat-expansion-panel>
+
+  <!-- Row 4 Panel: Options -->
+  <mat-expansion-panel [expanded]="true" (opened)="true" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Options
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-panel-description>
+      <button mat-raised-button color="primary">Continue with Bundle Process</button>
+      <button mat-raised-button color="warn">Close Task</button>
+    </mat-panel-description>
+  </mat-expansion-panel>
+
+  <!-- Row 5 Panel: Action Buttons -->
+  <mat-expansion-panel [expanded]="true" (opened)="true" hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Action Buttons
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-panel-description>
+      <button mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="warn">Cancel</button>
+    </mat-panel-description>
+  </mat-expansion-panel>
 </div>

@@ -19,6 +19,10 @@ export class TaskDetailsComponent implements OnInit {
   selectedFilesControl = new FormControl(); // Move this line inside the component
   displayedFiles: FileInfo[] | undefined = [];
   selectedFilesDataSource = new MatTableDataSource<any>([]); // MatTableDataSource for selected files
+
+  targetEnvironments: string[] = ['QA', 'PROD', 'Others'];
+  targetEnvironmentsControl = new FormControl(); 
+  
   constructor() {
     // Initialize the FormGroup
     this.taskDetailsForm = new FormGroup({
@@ -33,6 +37,7 @@ export class TaskDetailsComponent implements OnInit {
 
   goBack() {
     // Implement go back logic
+    this.goBackEvent.emit();
   }
 
   // Add more methods as needed
@@ -68,6 +73,7 @@ export class TaskDetailsComponent implements OnInit {
   addFiles() {
     const selectedFiles = this.selectedFilesControl.value;
     this.displayedFiles = this.task?.files.filter(file => selectedFiles.includes(file));
+    //const selectedFiles = this.targetEnvironmentsControl.value;
     //this.selectedFilesDataSource.data = this.displayedFiles | [];
   }
 }

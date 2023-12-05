@@ -29,12 +29,14 @@ export interface Task {
   title: string;
   description: string;
   details: string;
+  bundleFilename: string;
   owner : string;
   files : FileInfo[]; 
   possibleTargets : Target[];
 }
 export interface FileInfo {
   filename : string;
+  filesize : string; 
 }
 export interface Target{
   key : string,

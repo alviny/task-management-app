@@ -20,12 +20,21 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     // Fetch tasks from your backend or set them manually
     const tasks: Task[] = [
-      { id: 1, title: 'Task 1', description: 'Description 1', details: 'Details 1' , owner : 'alviny',
-        files : [{ filename : 'test.pdf' }],
+      { id: 1, title: 'Task 1', description: 'Description 1', details: 'Details 1' , owner : 'alviny',bundleFilename:'test.zip',
+        files : [
+          { filename : 'testdfgdfg.pdf', filesize : '30mb' },
+          { filename : 'testdfgdfg.pdf', filesize : '30mb' },
+          { filename : 'testdfgdfgdf.pdf', filesize : '30mb' },
+          { filename : 'testdfgdfgdfg.pdf', filesize : '30mb' },
+          { filename : 'testdfgdfg.pdf', filesize : '30mb' },
+          { filename : 'testdfgdfgdfgdfg.pdf', filesize : '30mb' }
+      
+      ],
         possibleTargets : [ { key : 'qa', display : 'QA'}, { key : 'pe', display : 'Post Edge'}]
       },
-      { id : 2, title: 'Task 2', description: 'Description 2', details: 'Details 2', owner : 'alviny',
-        files : [{ filename : 'test2.pdf'}],
+      { id : 2, title: 'Task 2', description: 'Description 2', details: 'Details 2', owner : 'alviny',bundleFilename:'test.zip',
+        files : [{ filename : 'test2.pdf', filesize : '10kb'}
+      ],
         possibleTargets : [ { key : 'qa', display : 'QA'}, { key : 'pe', display : 'Post Edge'}]
       },
       // Add more tasks as needed

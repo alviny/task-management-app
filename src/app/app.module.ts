@@ -18,7 +18,7 @@ import { MatExpansionModule } from '@angular/material/expansion'; // Import MatE
 import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
 import { MatCheckboxModule } from '@angular/material/checkbox'; // Import MatCheckboxModule
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +43,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatExpansionModule, 
     MatTableModule,
     MatCheckboxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
