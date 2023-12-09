@@ -1,9 +1,9 @@
 // task-details.component.ts
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Task } from '../task.service';
+import { Task } from '../services/task.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { FormControl, FormGroup } from '@angular/forms';
-import { FileInfo } from '../task.service';
+import { FileInfo } from '../services/task.service';
 import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-task-details',

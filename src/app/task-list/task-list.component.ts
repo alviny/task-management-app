@@ -1,6 +1,6 @@
 // task-list.component.ts
 import { Component, OnInit } from '@angular/core';
-import { TaskService, Task } from '../task.service';
+import { TaskService, Task } from '../services/task.service';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({

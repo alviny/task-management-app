@@ -19,11 +19,15 @@ import { MatTableModule } from '@angular/material/table'; // Import MatTableModu
 import { MatCheckboxModule } from '@angular/material/checkbox'; // Import MatCheckboxModule
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { BundleTransferListComponent } from './bundle-transfer-list/bundle-transfer-list.component';
+import { BundleTransferDetailComponent } from './bundle-transfer-detail/bundle-transfer-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
     TaskListComponent,
-    TaskDetailsComponent
+    TaskDetailsComponent,
+    BundleTransferListComponent,
+    BundleTransferDetailComponent
   ],
   imports: [
     BrowserModule,

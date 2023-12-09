@@ -1,0 +1,43 @@
+<!-- task-list.component.html -->
+<mat-expansion-panel [expanded]="!selectBundleTransfer===null">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2><span class="icon-task-list">&#xe90b;</span>Bundle Transfer List</h2>
+      </mat-panel-title>
+      <button mat-raised-button color="primary" *ngIf="selection.hasValue()" (click)="claimSelectedBundleTransfer()">Claim</button>
+    </mat-expansion-panel-header>
+    <mat-table [dataSource]="bundleTransfers" class="mat-elevation-z8" matSort matSortActive="taskId" matSortDirection="asc">
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()"></mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="taskId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Task ID</mat-header-cell>
+        <mat-cell *matCellDef="let bundleTransfer">{{ bundleTransfer.taskId }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="customerCode">
+        <mat-header-cell *matHeaderCellDef>Customer Code</mat-header-cell>
+        <mat-cell *matCellDef="let bundleTransfer">{{ bundleTransfer.customerCode }}</mat-cell>
+      </ng-container>      
+      <ng-container matColumnDef="bundleName">
+        <mat-header-cell *matHeaderCellDef>Bundle Name</mat-header-cell>
+        <mat-cell *matCellDef="let bundleTransfer">{{ bundleTransfer.bundleName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let bundleTransfer">{{ bundleTransfer.status }}</mat-cell>
+      </ng-container>
+      <!-- Add more columns as needed -->
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectBundleTransfer(row)" [class.selected-row]="selection.isSelected(row)"></mat-row>
+    </mat-table>
+  </mat-expansion-panel>
+
+<div class="task-details-fullscreen" *ngIf="selectedBundleTransfer">
+  <app-bundle-transfer-detail [bundleTransfer]="selectedBundleTransfer" (goBackEvent)="closeBundleTransferDetails()"></app-bundle-transfer-detail>
+</div>
